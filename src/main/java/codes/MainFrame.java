@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,7 @@ import javax.swing.JToolBar;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
 
 public class MainFrame extends JFrame {
 
@@ -24,6 +27,7 @@ public class MainFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private DefaultTableModel model;
 	private JTable table;
 	private JScrollPane scrollPane;
 	private GroupLayout gl_contentPane;
@@ -61,6 +65,12 @@ public class MainFrame extends JFrame {
 		contentPane.setBorder(null);
 
 		setContentPane(contentPane);
+		
+		model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+				"\u4ED3\u5E93\u7F16\u53F7", "\u4ED3\u5E93\u540D\u79F0", "\u836F\u54C1\u7F16\u53F7", "\u836F\u54C1\u6570\u91CF"
+			});
 		
 		toolBar = new JToolBar();
 		toolBar.setFloatable(false);
@@ -164,7 +174,7 @@ public class MainFrame extends JFrame {
 		btn_patient.setBorderPainted(false);
 		toolBar.add(btn_patient);
 		
-		lblNewLabel = new JLabel("药品信息");
+		lblNewLabel = new JLabel("库存信息");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
 		
@@ -201,9 +211,16 @@ public class MainFrame extends JFrame {
 		);
 		
 		table = new JTable();
+		table.setModel(model);
+		table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
 		table.setBackground(new Color(255, 255, 255));
-		scrollPane.setColumnHeaderView(table);
+		table.setRowHeight(25);
+		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
+		
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(2);
 	}
 	
 	void view_storage() {
@@ -212,14 +229,22 @@ public class MainFrame extends JFrame {
 		}else {
 			this.current_type = view_type.STORAGE;
 			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 1130, 800);
+			contentPane.removeAll();
+			contentPane.repaint();
+			
+			/*setBounds(100, 100, 1130, 800);
 			contentPane = new JPanel();
 			contentPane.setForeground(new Color(64, 128, 128));
 			contentPane.setBackground(new Color(219, 255, 251));
 			contentPane.setBorder(null);
 
-			setContentPane(contentPane);
+			setContentPane(contentPane);*/
+			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+				"\u4ED3\u5E93\u7F16\u53F7", "\u4ED3\u5E93\u540D\u79F0", "\u836F\u54C1\u7F16\u53F7", "\u836F\u54C1\u6570\u91CF"
+			});
 			
 			scrollPane = new JScrollPane();
 			
@@ -257,9 +282,18 @@ public class MainFrame extends JFrame {
 			);
 			
 			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
 			table.setBackground(new Color(255, 255, 255));
-			scrollPane.setColumnHeaderView(table);
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
 			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
 		}
 	}
 	
@@ -269,14 +303,22 @@ public class MainFrame extends JFrame {
 		}else {
 			this.current_type = view_type.DRUG;
 			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 1130, 800);
+			contentPane.removeAll();
+			contentPane.repaint();
+			
+			/*setBounds(100, 100, 1130, 800);
 			contentPane = new JPanel();
 			contentPane.setForeground(new Color(64, 128, 128));
 			contentPane.setBackground(new Color(219, 255, 251));
 			contentPane.setBorder(null);
 
-			setContentPane(contentPane);
+			setContentPane(contentPane);*/
+			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+					"\u836F\u54C1\u7F16\u53F7", "\u836F\u54C1\u540D\u79F0", "\u836F\u54C1\u5206\u7C7B", "\u836F\u54C1\u89C4\u683C", "\u5236\u836F\u5546\u7F16\u53F7", "\u836F\u54C1\u8FDB\u4EF7", "\u836F\u54C1\u552E\u4EF7", "\u751F\u4EA7\u65E5\u671F", "\u6709\u6548\u65E5\u671F"
+			});
 			
 			scrollPane = new JScrollPane();
 			
@@ -314,9 +356,18 @@ public class MainFrame extends JFrame {
 			);
 			
 			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
 			table.setBackground(new Color(255, 255, 255));
-			scrollPane.setColumnHeaderView(table);
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
 			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
 		}
 	}
 	
@@ -325,15 +376,17 @@ public class MainFrame extends JFrame {
 			//just stay
 		}else {
 			this.current_type = view_type.MANUFACTURE;
+
+			contentPane.removeAll();
+			contentPane.repaint();
 			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 1130, 800);
+			/*setBounds(100, 100, 1130, 800);
 			contentPane = new JPanel();
 			contentPane.setForeground(new Color(64, 128, 128));
 			contentPane.setBackground(new Color(219, 255, 251));
 			contentPane.setBorder(null);
 
-			setContentPane(contentPane);
+			setContentPane(contentPane);*/
 			
 			scrollPane = new JScrollPane();
 			
@@ -371,9 +424,18 @@ public class MainFrame extends JFrame {
 			);
 			
 			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
 			table.setBackground(new Color(255, 255, 255));
-			scrollPane.setColumnHeaderView(table);
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
 			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
 		}
 	}
 	
@@ -382,15 +444,17 @@ public class MainFrame extends JFrame {
 			//just stay
 		}else {
 			this.current_type = view_type.SELL;
+
+			contentPane.removeAll();
+			contentPane.repaint();
 			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 1130, 800);
+			/*setBounds(100, 100, 1130, 800);
 			contentPane = new JPanel();
 			contentPane.setForeground(new Color(64, 128, 128));
 			contentPane.setBackground(new Color(219, 255, 251));
 			contentPane.setBorder(null);
 
-			setContentPane(contentPane);
+			setContentPane(contentPane);*/
 			
 			scrollPane = new JScrollPane();
 			
@@ -428,9 +492,18 @@ public class MainFrame extends JFrame {
 			);
 			
 			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
 			table.setBackground(new Color(255, 255, 255));
-			scrollPane.setColumnHeaderView(table);
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
 			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
 		}
 	}
 	
@@ -439,15 +512,17 @@ public class MainFrame extends JFrame {
 			//just stay
 		}else {
 			this.current_type = view_type.PATIENT;
+
+			contentPane.removeAll();
+			contentPane.repaint();
 			
-			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 1130, 800);
+			/*setBounds(100, 100, 1130, 800);
 			contentPane = new JPanel();
 			contentPane.setForeground(new Color(64, 128, 128));
 			contentPane.setBackground(new Color(219, 255, 251));
 			contentPane.setBorder(null);
 
-			setContentPane(contentPane);
+			setContentPane(contentPane);*/
 			
 			scrollPane = new JScrollPane();
 			
@@ -485,9 +560,18 @@ public class MainFrame extends JFrame {
 			);
 			
 			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
 			table.setBackground(new Color(255, 255, 255));
-			scrollPane.setColumnHeaderView(table);
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
 			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
 		}
 	}
 }
