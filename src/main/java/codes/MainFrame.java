@@ -19,6 +19,10 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import java.awt.Button;
 
 public class MainFrame extends JFrame {
 
@@ -33,9 +37,23 @@ public class MainFrame extends JFrame {
 	private GroupLayout gl_contentPane;
 	private JToolBar toolBar;
 	private JLabel lblNewLabel;
-	private JButton btnNewButton_1;
+
+	private JRadioButton radio_1;
+	private JRadioButton radio_2;
+	private JRadioButton radio_3;
+	
+	private JButton btn_exit;
+	private JButton btn_detail;
+	private JButton btn_select;
+	
 	enum view_type{STORAGE, DRUG, MANUFACTURE, SELL, PATIENT};
 	private view_type current_type = view_type.STORAGE;
+
+	private JTextField text_1;
+	private JTextField text_2;
+	private JTextField text_3;
+	private JRadioButton radio_4;
+	private JTextField text_4;
 
 	/**
 	 * Launch the application.
@@ -57,6 +75,7 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		setTitle("药店管理系统");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1130, 800);
 		contentPane = new JPanel();
@@ -95,6 +114,14 @@ public class MainFrame extends JFrame {
 				view_storage();
 			}
 		});
+		
+		JButton btnNewButton_4 = new JButton("    ");
+		btnNewButton_4.setForeground(Color.WHITE);
+		btnNewButton_4.setFont(new Font("宋体", Font.PLAIN, 20));
+		btnNewButton_4.setEnabled(false);
+		btnNewButton_4.setBorderPainted(false);
+		btnNewButton_4.setBackground(new Color(0, 64, 0));
+		toolBar.add(btnNewButton_4);
 		btn_storage.setForeground(Color.WHITE);
 		btn_storage.setFont(new Font("宋体", Font.PLAIN, 25));
 		btn_storage.setBackground(new Color(0, 64, 0));
@@ -178,36 +205,117 @@ public class MainFrame extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
 		
-		btnNewButton_1 = new JButton("退出");
-		btnNewButton_1.setFont(new Font("宋体", Font.PLAIN, 20));
+		btn_exit = new JButton("退出");
+		btn_exit.setFont(new Font("宋体", Font.PLAIN, 20));
+		
+		btn_detail = new JButton("详情");
+		btn_detail.setFont(new Font("宋体", Font.PLAIN, 20));
+		btn_detail.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		text_1 = new JTextField();
+		text_1.setFont(new Font("宋体", Font.PLAIN, 16));
+		text_1.setColumns(10);
+		
+		text_2 = new JTextField();
+		text_2.setFont(new Font("宋体", Font.PLAIN, 16));
+		text_2.setColumns(10);
+
+		text_3 = new JTextField();
+		text_3.setFont(new Font("宋体", Font.PLAIN, 16));
+		text_3.setColumns(10);
+
+		radio_1 = new JRadioButton("仓库编号");
+		radio_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		radio_1.setBackground(new Color(219, 255, 251));
+
+		radio_2 = new JRadioButton("仓库名称");
+		radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		radio_2.setBackground(new Color(219, 255, 251));
+		
+		radio_3 = new JRadioButton("药品编号");
+		radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+		radio_3.setBackground(new Color(219, 255, 251));
+		
+		btn_select = new JButton("查找");
+		btn_select.setFont(new Font("宋体", Font.PLAIN, 17));
+		
+		radio_4 = new JRadioButton("仓库编号");
+		radio_4.setHorizontalAlignment(SwingConstants.TRAILING);
+		radio_4.setBackground(new Color(219, 255, 251));
+		
+		text_4 = new JTextField();
+		text_4.setFont(new Font("宋体", Font.PLAIN, 16));
+		text_4.setColumns(10);
+		
+		radio_4.setVisible(false);
+		text_4.setVisible(false);
 		
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(394)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+							.addGap(11)
+							.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+							.addGap(55))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(60)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-							.addGap(38))))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+							.addGap(44))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+							.addGap(383))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(137)
+							.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 520, Short.MAX_VALUE)
+							.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+							.addGap(106))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(58)
+					.addGap(30)
 					.addComponent(lblNewLabel)
-					.addGap(34)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btn_select)
+						.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(radio_3)
+						.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(radio_2)
+						.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(radio_1)
+						.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(radio_4))
+					.addGap(6)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(btnNewButton_1))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btn_exit)
+						.addComponent(btn_detail)))
 		);
 		
 		table = new JTable();
@@ -251,34 +359,91 @@ public class MainFrame extends JFrame {
 			lblNewLabel = new JLabel("库存信息");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
+
+			radio_1 = new JRadioButton("仓库编号");
+			radio_1.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_1.setBackground(new Color(219, 255, 251));
+			radio_1.setVisible(true);
+			text_1.setVisible(true);
+			
+			radio_2 = new JRadioButton("仓库名称");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(true);
+			text_2.setVisible(true);
+			
+			radio_3 = new JRadioButton("药品编号");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(true);
+			text_3.setVisible(true);
+			
+			radio_4.setVisible(false);
+			text_4.setVisible(false);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_contentPane.createSequentialGroup()
 						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(394)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+								.addGap(11)
+								.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+								.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(55))
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(60)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addGap(38))))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+								.addGap(44))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+								.addGap(383))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(137)
+								.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 520, Short.MAX_VALUE)
+								.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(106))))
 			);
 			gl_contentPane.setVerticalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(58)
+						.addGap(30)
 						.addComponent(lblNewLabel)
-						.addGap(34)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_select)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_1)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4))
+						.addGap(6)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
-						.addComponent(btnNewButton_1))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_detail)))
 			);
 			
 			table = new JTable();
@@ -326,33 +491,93 @@ public class MainFrame extends JFrame {
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
 			
+			radio_4 = new JRadioButton("药品编号");
+			radio_4.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_4.setBackground(new Color(219, 255, 251));
+			radio_4.setVisible(true);
+			text_4.setVisible(true);
+			
+			radio_1 = new JRadioButton("药品名称");
+			radio_1.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_1.setBackground(new Color(219, 255, 251));
+			radio_1.setVisible(true);
+			text_1.setVisible(true);
+			
+			radio_2 = new JRadioButton("制药商");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(true);
+			text_2.setVisible(true);
+			
+			radio_3 = new JRadioButton("药品分类");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(true);
+			text_3.setVisible(true);
+			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_contentPane.createSequentialGroup()
 						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(394)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+								.addGap(11)
+								.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+								.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(55))
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(60)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addGap(38))))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+								.addGap(44))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+								.addGap(383))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(137)
+								.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 520, Short.MAX_VALUE)
+								.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(106))))
 			);
 			gl_contentPane.setVerticalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(58)
+						.addGap(30)
 						.addComponent(lblNewLabel)
-						.addGap(34)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_select)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_1)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4))
+						.addGap(6)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
-						.addComponent(btnNewButton_1))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_detail)))
 			);
 			
 			table = new JTable();
@@ -388,39 +613,99 @@ public class MainFrame extends JFrame {
 
 			setContentPane(contentPane);*/
 			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+					"\u5236\u836F\u5546\u7F16\u53F7", "\u5236\u836F\u5546\u540D\u79F0", "\u8054\u7CFB\u7535\u8BDD", "\u90AE\u7BB1"
+			});
+			
 			scrollPane = new JScrollPane();
 			
 			lblNewLabel = new JLabel("制药商信息");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
+
+			radio_1.setVisible(false);
+			text_1.setVisible(false);
+			
+			radio_2 = new JRadioButton("编号");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(true);
+			text_2.setVisible(true);
+			
+			radio_3 = new JRadioButton("名称");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(true);
+			text_3.setVisible(true);
+			
+			radio_4.setVisible(false);
+			text_4.setVisible(false);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_contentPane.createSequentialGroup()
 						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(394)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+								.addGap(11)
+								.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+								.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(55))
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(60)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addGap(38))))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+								.addGap(44))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+								.addGap(383))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(137)
+								.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 520, Short.MAX_VALUE)
+								.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(106))))
 			);
 			gl_contentPane.setVerticalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(58)
+						.addGap(30)
 						.addComponent(lblNewLabel)
-						.addGap(34)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_select)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_1)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4))
+						.addGap(6)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
-						.addComponent(btnNewButton_1))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_detail)))
 			);
 			
 			table = new JTable();
@@ -456,39 +741,105 @@ public class MainFrame extends JFrame {
 
 			setContentPane(contentPane);*/
 			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+					"\u75C5\u4EBA\u7F16\u53F7", "\u836F\u54C1\u7F16\u53F7", "\u6570\u91CF", "\u5904\u7406\u65F6\u95F4", "\u9500\u9000\u65B9\u5F0F"
+			});
+			
 			scrollPane = new JScrollPane();
 			
 			lblNewLabel = new JLabel("销售信息");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
+
+			radio_4 = new JRadioButton("病人编号");
+			radio_4.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_4.setBackground(new Color(219, 255, 251));
+			radio_4.setVisible(true);
+			text_4.setVisible(true);
+			
+			radio_1 = new JRadioButton("药品编号");
+			radio_1.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_1.setBackground(new Color(219, 255, 251));
+			radio_1.setVisible(true);
+			text_1.setVisible(true);
+			
+			radio_2 = new JRadioButton("处理时间");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(true);
+			text_2.setVisible(true);
+			
+			radio_3 = new JRadioButton("销退方式");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(true);
+			text_3.setVisible(true);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_contentPane.createSequentialGroup()
 						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(394)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+								.addGap(11)
+								.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+								.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(55))
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(60)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addGap(38))))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+								.addGap(44))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+								.addGap(383))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(137)
+								.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 520, Short.MAX_VALUE)
+								.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(106))))
 			);
 			gl_contentPane.setVerticalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(58)
+						.addGap(30)
 						.addComponent(lblNewLabel)
-						.addGap(34)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_select)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_1)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4))
+						.addGap(6)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
-						.addComponent(btnNewButton_1))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_detail)))
 			);
 			
 			table = new JTable();
@@ -524,39 +875,99 @@ public class MainFrame extends JFrame {
 
 			setContentPane(contentPane);*/
 			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+					"\u75C5\u4EBA\u7F16\u53F7", "\u59D3\u540D", "\u6027\u522B", "\u5E74\u9F84", "\u8054\u7CFB\u7535\u8BDD", "\u4F4F\u5740"
+			});
+			
 			scrollPane = new JScrollPane();
 			
 			lblNewLabel = new JLabel("顾客信息");
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
+
+			radio_1.setVisible(false);
+			text_1.setVisible(false);
+			
+			radio_2 = new JRadioButton("病人编号");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(true);
+			text_2.setVisible(true);
+			
+			radio_3 = new JRadioButton("药品姓名");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(true);
+			text_3.setVisible(true);
+
+			radio_4.setVisible(false);
+			text_4.setVisible(false);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addGroup(gl_contentPane.createSequentialGroup()
 						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(394)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+								.addGap(11)
+								.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 2, Short.MAX_VALUE)
+								.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+								.addGap(18)
+								.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(55))
 							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(60)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED, 822, Short.MAX_VALUE)
-								.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-								.addGap(38))))
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+								.addGap(44))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
+								.addGap(383))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(137)
+								.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 520, Short.MAX_VALUE)
+								.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+								.addGap(106))))
 			);
 			gl_contentPane.setVerticalGroup(
 				gl_contentPane.createParallelGroup(Alignment.LEADING)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
 					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(58)
+						.addGap(30)
 						.addComponent(lblNewLabel)
-						.addGap(34)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_select)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_1)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4))
+						.addGap(6)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 						.addGap(18)
-						.addComponent(btnNewButton_1))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_detail)))
 			);
 			
 			table = new JTable();
