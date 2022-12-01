@@ -170,8 +170,8 @@ public class Executor extends Connector{
 		System.out.println("AdminInfo: Successfully get all messages!");
 		return res;
 	}
-	/*
-	public Vector<drugInfo> drugInfo_selectdata(String no, String name, String type, String M_n) throws SQLException{
+	
+	public Vector<drugInfo> drugInfo_selectdata(String no, String name, String type, String M_n, int c1, int c2, int c3, int c4) throws SQLException{
 		conn = getConnection();
 		
 		Vector<drugInfo> res = new Vector<drugInfo>();
@@ -179,11 +179,34 @@ public class Executor extends Connector{
 		Statement st = null;
 		try {
 			st = conn.createStatement();
-			if(no != null && name != null && type != null && M_n != null) {
-				rs = st.executeQuery("select * from drugInfo where Chemical_no='"+ no +"' and Chemical_name='"+ name +"' and Chemical_type='"+ type +"' and Chemical_manufacture_no='"+ M_n +"'");
-			}else if(no == null && name != null && type != null && M_n != null) {
-				rs = st.executeQuery("select * from drugInfo where Chemical_no='"+ no +"' and Chemical_name='"+ name +"' and Chemical_type='"+ type +"' and Chemical_manufacture_no='"+ M_n +"'");
+			
+			String slct = "select * from drugInfo";
+			if(c1 != -1) {
+				slct += " where Chemical_no='"+ no +"'";
 			}
+			if(c2 != -1) {
+				if(c1 != -1)
+					slct += " and Chemical_name='"+ name +"'";
+				else
+					slct += " where Chemical_name='"+ name +"'";
+			}
+			if(c3 != -1) {
+				if(c1 != -1 || c2 != -1)
+					slct += " and Chemical_type='"+ type +"'";
+				else
+					slct += " where Chemical_type='"+ type +"'";
+			}
+			if(c4 != -1) {
+				if(c1 != -1 || c2 != -1 || c3 != -1)
+					slct += " and Chemical_manufacture_no='"+ M_n +"'";
+				else
+					slct += " where Chemical_manufacture_no='"+ M_n +"'";
+			}
+			slct += ";";
+			rs = st.executeQuery(slct);
+			
+			System.out.println(slct);
+			
 			while(rs.next()) {
 				drugInfo temp = new drugInfo(rs.getString(1), rs.getString(2), rs.getString(3),
 						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
@@ -200,10 +223,190 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
-		System.out.println("drugInfo: Successfully get all messages!");
+		System.out.println("drugInfo: Successfully get selected messages!");
 		return res;
 	}
-	*/
+	
+	public Vector<Manufacture> Manufacture_selectdata(String no, String name, int c1, int c2) throws SQLException{
+		conn = getConnection();
+		
+		Vector<Manufacture> res = new Vector<Manufacture>();
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			
+			String slct = null;
+			if(c1 != -1 && c2 == -1) {
+				slct = "select * from Manufacture where Chemical_manufacture_no='"+ no +"';";
+			}
+			if(c2 != -1 && c1 != -1) {
+				slct = "select * from Manufacture where Chemical_manufacture_no='"+ no +"' and Chemical_manufacture_no in ("
+						+ " select Chemical_manufacture_no from Manufacture where Chemical_manufacture_name='"+ name +"');";
+			}
+			if(c1 == -1 && c2 != -1) {
+				slct = "select * from Manufacture where Chemical_manufacture_name='"+ name +"';";
+			}
+			if(c1 == -1 && c2 == -1) {
+				slct = "select * from Manufacture;";
+			}
+			rs = st.executeQuery(slct);
+			
+			System.out.println(slct);
+			
+			while(rs.next()) {
+				Manufacture temp = new Manufacture(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
+				res.addElement(temp);
+				
+				//System.out.println(temp.getChemical_menufacture_no());
+				//System.out.println(temp.getChemical_manufacture_name());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			rs.close();
+			conn.close();
+		}
+		System.out.println("Manufacture: Successfully get selected messages!");
+		return res;
+	}
+	
+	public Vector<Storage> Storage_selectdata(String C_no, String W_no, String name, int c1, int c2, int c3) throws SQLException{
+		conn = getConnection();
+		
+		Vector<Storage> res = new Vector<Storage>();
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			
+			String slct = "select * from Storage";
+			if(c1 != -1) {
+				slct += " where Chemical_no='"+ C_no +"'";
+			}
+			if(c2 != -1) {
+				if(c1 != -1)
+					slct += " and Warehouse_no='"+ W_no +"'";
+				else
+					slct += " where Warehouse_no='"+ W_no +"'";
+			}
+			if(c3 != -1) {
+				if(c1 != -1 || c2 != -1)
+					slct += " and Warehouse_name='"+ name +"'";
+				else
+					slct += " where Warehouse_name='"+ name +"'";
+			}
+			slct += ";";
+			rs = st.executeQuery(slct);
+			
+			System.out.println(slct);
+			
+			while(rs.next()) {
+				Storage temp = new Storage(rs.getString(1), rs.getString(2), rs.getInt(3),rs.getString(4));
+				res.addElement(temp);
+				
+				//System.out.println(temp.getWarehouse_no());
+				//System.out.println(temp.getWarehouse_name());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			rs.close();
+			conn.close();
+		}
+		System.out.println("Storage: Successfully get selected messages!");
+		return res;
+	}
+	
+	public Vector<Patient> Patient_selectdata(String no, String name, int c1, int c2) throws SQLException{
+		conn = getConnection();
+		
+		Vector<Patient> res = new Vector<Patient>();
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			
+			String slct = null;
+			if(c1 != -1 && c2 == -1) {
+				slct = "select * from Patient where Patient_no='"+ no +"';";
+			}
+			if(c1 == -1 && c2 != -1) {
+				slct = "select * from Patient where Patient_name='"+ name +"';";
+			}
+			if(c1 == -1 && c2 == -1) {
+				slct = "select * from Patient;";
+			}
+			if(c2 != -1 && c2 != -1) {
+				slct = "select * from Patient P1 join Patient P2 on P1.Patient_no = P2.Patient_no "
+						+ "where P1.Patient_no='"+ no +"' and P2.Patient_name='"+ name +"';";
+			}
+			rs = st.executeQuery(slct);
+			
+			System.out.println(slct);
+			
+			while(rs.next()) {
+				Patient temp = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6));
+				res.addElement(temp);
+				
+				//System.out.println(temp.getPatient_no());
+				//System.out.println(temp.getPatient_name());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			rs.close();
+			conn.close();
+		}
+		System.out.println("Patient: Successfully get selected messages!");
+		return res;
+	}
+	
+	public Vector<Sell> Sell_selectdata(String P_no, String C_no, int c1, int c2) throws SQLException{
+		conn = getConnection();
+		
+		Vector<Sell> res = new Vector<Sell>();
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			
+			String slct = "select * from Sell_rebate";
+			if(c1 != -1) {
+				slct += " where Patient_no='"+ P_no +"'";
+			}
+			if(c2 != -1) {
+				if(c1 != -1)
+					slct += " and Chemical_no='"+ C_no +"'";
+				else
+					slct += " where Chemical_no='"+ C_no +"'";
+			}
+			slct += ";";
+			rs = st.executeQuery(slct);
+			
+			System.out.println(slct);
+			
+			while(rs.next()) {
+				Sell temp = new Sell(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getTime(4), rs.getDate(4));
+				res.addElement(temp);
+
+				//System.out.println(temp.getDeal_date());
+				//System.out.println(temp.getPatient_no());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			rs.close();
+			conn.close();
+		}
+		System.out.println("Sell: Successfully get selected messages!");
+		return res;
+	}
+	
 	public Vector<AdminInfo> AdminInfo_selectdata(String no) throws SQLException{
 		conn = getConnection();
 		
