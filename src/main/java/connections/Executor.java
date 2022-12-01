@@ -22,8 +22,8 @@ public class Executor extends Connector{
 						rs.getTime(8), rs.getTime(9), rs.getDate(8), rs.getDate(9));
 				res.addElement(temp);
 				
-				System.out.println(temp.getChemical_no());
-				System.out.println(temp.getChemical_name());
+				//System.out.println(temp.getProduct_date());
+				//System.out.println(temp.getValidity_date());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -48,8 +48,8 @@ public class Executor extends Connector{
 				Manufacture temp = new Manufacture(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
 				res.addElement(temp);
 				
-				System.out.println(temp.getChemical_menufacture_no());
-				System.out.println(temp.getChemical_manufacture_name());
+				//System.out.println(temp.getChemical_menufacture_no());
+				//System.out.println(temp.getChemical_manufacture_name());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -74,8 +74,8 @@ public class Executor extends Connector{
 				Storage temp = new Storage(rs.getString(1), rs.getString(2), rs.getInt(3),rs.getString(4));
 				res.addElement(temp);
 				
-				System.out.println(temp.getWarehouse_no());
-				System.out.println(temp.getWarehouse_name());
+				//System.out.println(temp.getWarehouse_no());
+				//System.out.println(temp.getWarehouse_name());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -100,8 +100,8 @@ public class Executor extends Connector{
 				Patient temp = new Patient(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6));
 				res.addElement(temp);
 				
-				System.out.println(temp.getPatient_no());
-				System.out.println(temp.getPatient_name());
+				//System.out.println(temp.getPatient_no());
+				//System.out.println(temp.getPatient_name());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -126,9 +126,8 @@ public class Executor extends Connector{
 				Sell temp = new Sell(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getTime(4), rs.getDate(4));
 				res.addElement(temp);
 
-				System.out.println(temp.getDeal());
-				System.out.println(temp.getDeal_time());
-				System.out.println(temp.getPatient_no());
+				//System.out.println(temp.getDeal_date());
+				//System.out.println(temp.getPatient_no());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -153,8 +152,34 @@ public class Executor extends Connector{
 				AdminInfo temp = new AdminInfo(rs.getString(1), rs.getString(2), rs.getString(3));
 				res.addElement(temp);
 				
-				System.out.println(temp.getAdmin_name());
-				System.out.println(temp.getPass_word());
+				//System.out.println(temp.getAdmin_name());
+				//System.out.println(temp.getPass_word());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			rs.close();
+			conn.close();
+		}
+		return res;
+	}
+	
+	public Vector<AdminInfo> AdminInfo_selectdata(String no, String pswd) throws SQLException{
+		conn = getConnection();
+		
+		Vector<AdminInfo> res = new Vector<AdminInfo>();
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			rs = st.executeQuery("select Admin_name from AdminInfo");
+			while(rs.next()) {
+				AdminInfo temp = new AdminInfo(rs.getString(1), rs.getString(2), rs.getString(3));
+				res.addElement(temp);
+				
+				//System.out.println(temp.getAdmin_name());
+				//System.out.println(temp.getPass_word());
 			}
 		}catch(Exception e) {
 			e.printStackTrace();

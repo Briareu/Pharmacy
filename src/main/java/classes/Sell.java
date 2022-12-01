@@ -9,6 +9,7 @@ public class Sell {
 	public int Count;
 	public Time Deal_time;
 	public Date Deal;
+	public String Deal_date;
 
 	public Sell(String P_n, String C_n, int count, Time deal, Date d) {
 		Patient_no = P_n;
@@ -16,6 +17,8 @@ public class Sell {
 		Count = count;
 		Deal_time = deal;
 		Deal = d;
+		
+		Deal_date = Deal.toString() + " " + Deal_time.toString();
 	}
 	
 	public Sell(Sell temp) {
@@ -23,9 +26,19 @@ public class Sell {
 		Chemical_no = temp.getChemical_no();
 		Count = temp.getCount();
 		Deal_time = temp.getDeal_time();
-		Deal = Deal_time;
+		Deal = temp.getDeal();
+		
+		Deal_date = temp.getDeal_date();
 	}
 	
+	public String getDeal_date() {
+		return Deal_date;
+	}
+
+	public void setDeal_date(String deal_date) {
+		Deal_date = deal_date;
+	}
+
 	public String getPatient_no() {
 		return Patient_no;
 	}

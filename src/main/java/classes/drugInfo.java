@@ -15,6 +15,8 @@ public class drugInfo {
 	public Time Chemical_validity_date;
 	public Date product;
 	public Date validity;
+	public String product_date;
+	public String validity_date;
 	
 	public drugInfo(String C_no, String C_name, String C_type, String C_standard, String C_m_no, 
 			String C_b_p, String C_s_p, Time C_p_d, Time C_v_d, Date p, Date v) {
@@ -29,8 +31,11 @@ public class drugInfo {
 		Chemical_validity_date = C_v_d;
 		product = p;
 		validity = v;
+		
+		product_date = product.toString() + " " + Chemical_product_date.toString();
+		validity_date = validity.toString() + " " + Chemical_validity_date.toString();
 	}
-	
+
 	public drugInfo(drugInfo temp) {
 		Chemical_no = temp.getChemical_no();
 		Chemical_name = temp.getChemical_name();
@@ -43,6 +48,8 @@ public class drugInfo {
 		Chemical_validity_date = temp.getChemical_validity_date();
 		product = temp.getProduct();
 		validity = temp.getValidity();
+		product_date = temp.getProduct_date();
+		validity_date = temp.getValidity_date();
 	}
 	
 	public String getChemical_no() {
@@ -114,5 +121,21 @@ public class drugInfo {
 
 	public void setValidity(Date validity) {
 		this.validity = validity;
+	}
+
+	public String getProduct_date() {
+		return product_date;
+	}
+
+	public void setProduct_date(String product_date) {
+		this.product_date = product_date;
+	}
+
+	public String getValidity_date() {
+		return validity_date;
+	}
+
+	public void setValidity_date(String validity_date) {
+		this.validity_date = validity_date;
 	}
 }

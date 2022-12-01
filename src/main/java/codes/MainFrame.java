@@ -10,6 +10,7 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
@@ -19,10 +20,11 @@ import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
-import java.awt.Button;
+import classes.*;
+import java.util.Vector;
+import connections.*;
 
 public class MainFrame extends JFrame {
 
@@ -55,6 +57,8 @@ public class MainFrame extends JFrame {
 	private JTextField text_3;
 	private JRadioButton radio_4;
 	private JTextField text_4;
+	
+	private Executor executor;
 
 	/**
 	 * Launch the application.
@@ -90,7 +94,17 @@ public class MainFrame extends JFrame {
 			},
 			new String[] {
 				"药品编号", "仓库编号", "药品数量", "仓库名称"
-			});
+			}){
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column)
+            {
+                return false;
+            }
+		};
 		
 		toolBar = new JToolBar();
 		toolBar.setFloatable(false);
@@ -334,11 +348,14 @@ public class MainFrame extends JFrame {
 		
 		table = new JTable();
 		table.setModel(model);
-		table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
+		table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
 		table.setBackground(new Color(255, 255, 255));
 		table.setRowHeight(25);
 		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 		scrollPane.setViewportView(table);
+		
+		table_update(model);
+		
 		contentPane.setLayout(gl_contentPane);
 		
 		this.setLocationRelativeTo(null);
@@ -366,7 +383,17 @@ public class MainFrame extends JFrame {
 			},
 			new String[] {
 					"药品编号", "仓库编号", "药品数量", "仓库名称"
-			});
+			}){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
 			
 			scrollPane = new JScrollPane();
 			
@@ -468,11 +495,14 @@ public class MainFrame extends JFrame {
 			
 			table = new JTable();
 			table.setModel(model);
-			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
 			table.setBackground(new Color(255, 255, 255));
 			table.setRowHeight(25);
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
+			
+			table_update(model);
+			
 			contentPane.setLayout(gl_contentPane);
 			
 			contentPane.revalidate();
@@ -503,7 +533,17 @@ public class MainFrame extends JFrame {
 			},
 			new String[] {
 					"药品编号", "药品名称", "药品分类", "药品规格", "制药商编号", "药品进价", "药品售价", "生产日期", "有效日期"
-			});
+			}){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
 			
 			scrollPane = new JScrollPane();
 			
@@ -608,11 +648,14 @@ public class MainFrame extends JFrame {
 			
 			table = new JTable();
 			table.setModel(model);
-			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
 			table.setBackground(new Color(255, 255, 255));
 			table.setRowHeight(25);
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
+			
+			table_update(model);
+			
 			contentPane.setLayout(gl_contentPane);
 			
 			contentPane.revalidate();
@@ -639,11 +682,17 @@ public class MainFrame extends JFrame {
 
 			setContentPane(contentPane);*/
 			
-			model = new DefaultTableModel(new Object[][] {
-			},
-			new String[] {
-					"制药商编号", "制药商名称", "联系电话", "邮箱"
-			});
+			model = new DefaultTableModel(new Object[][] {}, new String[] {"制药商编号", "制药商名称", "联系电话", "邮箱"}) {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
 			
 			scrollPane = new JScrollPane();
 			
@@ -742,11 +791,14 @@ public class MainFrame extends JFrame {
 			
 			table = new JTable();
 			table.setModel(model);
-			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
 			table.setBackground(new Color(255, 255, 255));
 			table.setRowHeight(25);
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
+			
+			table_update(model);
+			
 			contentPane.setLayout(gl_contentPane);
 			
 			contentPane.revalidate();
@@ -777,7 +829,17 @@ public class MainFrame extends JFrame {
 			},
 			new String[] {
 					"病人编号", "药品编号", "数量", "处理时间"
-			});
+			}){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
 			
 			scrollPane = new JScrollPane();
 			
@@ -882,11 +944,14 @@ public class MainFrame extends JFrame {
 			
 			table = new JTable();
 			table.setModel(model);
-			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
 			table.setBackground(new Color(255, 255, 255));
 			table.setRowHeight(25);
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
+			
+			table_update(model);
+			
 			contentPane.setLayout(gl_contentPane);
 			
 			contentPane.revalidate();
@@ -917,7 +982,17 @@ public class MainFrame extends JFrame {
 			},
 			new String[] {
 					"病人编号", "姓名", "性别", "年龄", "联系电话", "住址"
-			});
+			}){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
 			
 			scrollPane = new JScrollPane();
 			
@@ -1016,17 +1091,167 @@ public class MainFrame extends JFrame {
 			
 			table = new JTable();
 			table.setModel(model);
-			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 17));
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
 			table.setBackground(new Color(255, 255, 255));
 			table.setRowHeight(25);
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
+			
+			table_update(model);
+			
 			contentPane.setLayout(gl_contentPane);
 			
 			contentPane.revalidate();
 			
 			this.setLocationRelativeTo(null);
 			this.setDefaultCloseOperation(2);
+		}
+	}
+	
+	Vector<Storage> Storage_getall(){
+		executor = new Executor();
+		Vector<Storage> res = new Vector<Storage>();
+		try {
+			res = executor.Storage_getdata();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	Vector<drugInfo> drug_getall(){
+		executor = new Executor();
+		Vector<drugInfo> res = new Vector<drugInfo>();
+		try {
+			res = executor.drug_getdata();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	Vector<Manufacture> Manufacture_getall(){
+		executor = new Executor();
+		Vector<Manufacture> res = new Vector<Manufacture>();
+		try {
+			res = executor.Manufacture_getdata();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	Vector<Sell> Sell_getall(){
+		executor = new Executor();
+		Vector<Sell> res = new Vector<Sell>();
+		try {
+			res = executor.Sell_getdata();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	Vector<Patient> Patient_getall(){
+		executor = new Executor();
+		Vector<Patient> res = new Vector<Patient>();
+		try {
+			res = executor.Patient_getdata();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	void table_update(DefaultTableModel current_model) {
+		switch(current_type) {
+		case STORAGE:
+		{
+			Vector<Storage> res = Storage_getall();
+			Object [] arr = new Object[4];
+			for(int i = 0; i < res.size(); i++) {
+				arr[0] = res.get(i).getChemical_no();
+				arr[1] = res.get(i).getWarehouse_no();
+				arr[2] = res.get(i).getChemical_number();
+				arr[3] = res.get(i).getWarehouse_name();
+				
+				current_model.addRow(arr);
+			}
+			table.setModel(current_model);
+			break;
+		}
+		case DRUG:
+		{
+			Vector<drugInfo> res = drug_getall();
+			Object [] arr = new Object[9];
+			for(int i = 0; i < res.size(); i++) {
+				arr[0] = res.get(i).getChemical_no();
+				arr[1] = res.get(i).getChemical_name();
+				arr[2] = res.get(i).getChemical_type();
+				arr[3] = res.get(i).getChemical_standard();
+				arr[4] = res.get(i).getChemical_manufacture_no();
+				arr[5] = res.get(i).getChemical_buy_price();
+				arr[6] = res.get(i).getChemical_sell_price();
+				arr[7] = res.get(i).getProduct_date();
+				arr[8] = res.get(i).getValidity_date();
+				
+				current_model.addRow(arr);
+			}
+			table.setModel(current_model);
+			break;
+		}
+		case MANUFACTURE:
+		{
+			Vector<Manufacture> res = Manufacture_getall();
+			Object [] arr = new Object[4];
+			for(int i = 0; i < res.size(); i++) {
+				arr[0] = res.get(i).getChemical_menufacture_no();
+				arr[1] = res.get(i).getChemical_manufacture_name();
+				arr[2] = res.get(i).getChemical_manufacture_tel();
+				arr[3] = res.get(i).getChemical_manufacture_email();
+				
+				current_model.addRow(arr);
+			}
+			table.setModel(current_model);
+			break;
+		}
+		case SELL:
+		{
+			Vector<Sell> res = Sell_getall();
+			Object [] arr = new Object[4];
+			for(int i = 0; i < res.size(); i++) {
+				arr[0] = res.get(i).getPatient_no();
+				arr[1] = res.get(i).getChemical_no();
+				arr[2] = res.get(i).getCount();
+				arr[3] = res.get(i).getDeal_date();
+				
+				current_model.addRow(arr);
+			}
+			table.setModel(current_model);
+			break;
+		}
+		case PATIENT:
+		{
+			Vector<Patient> res = Patient_getall();
+			Object [] arr = new Object[6];
+			for(int i = 0; i < res.size(); i++) {
+				arr[0] = res.get(i).getPatient_no();
+				arr[1] = res.get(i).getPatient_name();
+				arr[2] = res.get(i).getPatient_sex();
+				arr[3] = res.get(i).getPatient_age();
+				arr[4] = res.get(i).getPatient_tel();
+				arr[5] = res.get(i).getPatient_add();
+				
+				current_model.addRow(arr);
+			}
+			table.setModel(current_model);
+			break;
+		}
 		}
 	}
 }
