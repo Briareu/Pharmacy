@@ -32,6 +32,7 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("drugInfo: Successfully get all messages!");
 		return res;
 	}
 	
@@ -58,6 +59,7 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("Manufacture: Successfully get all messages!");
 		return res;
 	}
 	
@@ -84,6 +86,7 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("Storage: Successfully get all messages!");
 		return res;
 	}
 	
@@ -110,6 +113,7 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("Patient: Successfully get all messages!");
 		return res;
 	}
 	
@@ -136,6 +140,7 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("Sell_rebate: Successfully get all messages!");
 		return res;
 	}
 	
@@ -162,10 +167,44 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("AdminInfo: Successfully get all messages!");
 		return res;
 	}
-	
-	public Vector<AdminInfo> AdminInfo_selectdata(String no, String pswd) throws SQLException{
+	/*
+	public Vector<drugInfo> drugInfo_selectdata(String no, String name, String type, String M_n) throws SQLException{
+		conn = getConnection();
+		
+		Vector<drugInfo> res = new Vector<drugInfo>();
+		ResultSet rs = null;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			if(no != null && name != null && type != null && M_n != null) {
+				rs = st.executeQuery("select * from drugInfo where Chemical_no='"+ no +"' and Chemical_name='"+ name +"' and Chemical_type='"+ type +"' and Chemical_manufacture_no='"+ M_n +"'");
+			}else if(no == null && name != null && type != null && M_n != null) {
+				rs = st.executeQuery("select * from drugInfo where Chemical_no='"+ no +"' and Chemical_name='"+ name +"' and Chemical_type='"+ type +"' and Chemical_manufacture_no='"+ M_n +"'");
+			}
+			while(rs.next()) {
+				drugInfo temp = new drugInfo(rs.getString(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),
+						rs.getTime(8), rs.getTime(9), rs.getDate(8), rs.getDate(9));
+				res.addElement(temp);
+				
+				//System.out.println(temp.getProduct_date());
+				//System.out.println(temp.getValidity_date());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			rs.close();
+			conn.close();
+		}
+		System.out.println("drugInfo: Successfully get all messages!");
+		return res;
+	}
+	*/
+	public Vector<AdminInfo> AdminInfo_selectdata(String no) throws SQLException{
 		conn = getConnection();
 		
 		Vector<AdminInfo> res = new Vector<AdminInfo>();
@@ -173,7 +212,7 @@ public class Executor extends Connector{
 		Statement st = null;
 		try {
 			st = conn.createStatement();
-			rs = st.executeQuery("select Admin_name from AdminInfo");
+			rs = st.executeQuery("select * from AdminInfo where Admin_no='"+ no +"'");
 			while(rs.next()) {
 				AdminInfo temp = new AdminInfo(rs.getString(1), rs.getString(2), rs.getString(3));
 				res.addElement(temp);
@@ -188,6 +227,30 @@ public class Executor extends Connector{
 			rs.close();
 			conn.close();
 		}
+		System.out.println("AdminInfo: Successfully get selected messages!");
 		return res;
+	}
+	
+	public int AdminInfo_insertdata(String no, String name, String pswd)  throws SQLException{
+		Vector<AdminInfo> res = AdminInfo_selectdata(no);
+		if(res.size() != 0)
+			return -1;
+		
+		conn = getConnection();
+
+		boolean rs = false;
+		Statement st = null;
+		try {
+			st = conn.createStatement();
+			
+			rs = st.execute("insert into AdminInfo(Admin_no, Admin_name, Pass_word) values('"+ no +"', '"+ name +"', '"+ pswd +"')");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			st.close();
+			conn.close();
+		}
+		System.out.println("AdminInfo: Successfully insert!");
+		return 0;
 	}
 }
