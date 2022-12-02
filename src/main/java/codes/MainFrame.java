@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Color;
+import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 
 import javax.swing.JButton;
@@ -15,6 +16,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 import java.awt.Font;
 import javax.swing.JTable;
@@ -287,6 +289,48 @@ public class MainFrame extends JFrame {
 		btn_detail = new JButton("详情");
 		btn_detail.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Object temp = new Object();
+				int target = table.getSelectedRow();
+				if(target == -1) {
+					JOptionPane.showMessageDialog(null, "请先进行选择！", "提示", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				switch(current_type) {
+				case DRUG:{
+					drugInfo current = new drugInfo(table.getValueAt(target, 0).toString(), table.getValueAt(target, 1).toString(), table.getValueAt(target, 2).toString(), table.getValueAt(target, 3).toString(), table.getValueAt(target, 4).toString(), 
+							table.getValueAt(target, 5).toString(), table.getValueAt(target, 6).toString(), table.getValueAt(target, 7).toString(), table.getValueAt(target, 8).toString());
+					temp = current;
+					detail(temp);
+				}
+					break;
+				case MANUFACTURE:{
+					Manufacture current = new Manufacture(table.getValueAt(target, 0).toString(), table.getValueAt(target, 1).toString(), table.getValueAt(target, 2).toString(), table.getValueAt(target, 3).toString());
+					temp = current;
+					detail(temp);
+				}
+					break;
+				case PATIENT:{
+					Patient current = new Patient(table.getValueAt(target, 0).toString(), table.getValueAt(target, 1).toString(), table.getValueAt(target, 2).toString(), Integer.parseInt(table.getValueAt(target, 3).toString()), table.getValueAt(target, 4).toString(), table.getValueAt(target, 5).toString());
+					temp = current;
+					detail(temp);
+				}
+					break;
+				case SELL:{
+					Sell current = new Sell(table.getValueAt(target, 0).toString(), table.getValueAt(target, 1).toString(), Integer.parseInt(table.getValueAt(target, 2).toString()), table.getValueAt(target, 3).toString());
+					temp = current;
+					detail(temp);
+				}
+					break;
+				case STORAGE:{
+					Storage current = new Storage(table.getValueAt(target, 0).toString(), table.getValueAt(target, 1).toString(), 
+							Integer.parseInt(table.getValueAt(target, 2).toString()), table.getValueAt(target, 3).toString());
+					temp = current;
+					detail(temp);
+				}
+					break;
+				default:
+					break;
+				}
 			}
 		});
 		btn_detail.setFont(new Font("宋体", Font.PLAIN, 20));
@@ -1545,5 +1589,13 @@ public class MainFrame extends JFrame {
 			break;
 		}
 		}
+	}
+	
+	public void detail(Object temp) {
+		this.setEnabled(false);
+		this.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
+		
+		DetailsFrame frame = new DetailsFrame(this, current_type, temp);
+		frame.setVisible(true);
 	}
 }

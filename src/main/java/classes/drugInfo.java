@@ -35,6 +35,19 @@ public class drugInfo {
 		product_date = product.toString() + " " + Chemical_product_date.toString();
 		validity_date = validity.toString() + " " + Chemical_validity_date.toString();
 	}
+	
+	public drugInfo(String C_no, String C_name, String C_type, String C_standard, String C_m_no, 
+			String C_b_p, String C_s_p, String p_d, String v_d) {
+		Chemical_no = C_no;
+		Chemical_name = C_name;
+		Chemical_type = C_type;
+		Chemical_standard = C_standard;
+		Chemical_manufacture_no = C_m_no;
+		Chemical_buy_price = C_b_p;
+		Chemical_sell_price = C_s_p;
+		product_date = p_d;
+		validity_date = v_d;
+	}
 
 	public drugInfo(drugInfo temp) {
 		Chemical_no = temp.getChemical_no();

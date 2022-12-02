@@ -14,7 +14,8 @@ public class Main {
 		
 		/*Executor e = new Executor();
 		try {
-			e.Patient_selectdata("P001", "张甲", 0, 0);
+			int res =e.drug_update("Y0003", "999感冒灵", "内服", "处方", "000002", "60", "99", "2022-09-16 00:00:00", "2023-03-25 00:00:00", "Y0003");
+			System.out.println(res);
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -21,6 +21,13 @@ public class Sell {
 		Deal_date = Deal.toString() + " " + Deal_time.toString();
 	}
 	
+	public Sell(String P_n, String C_n, int count, String d) {
+		Patient_no = P_n;
+		Chemical_no = C_n;
+		Count = count;
+		Deal_date = d;
+	}
+	
 	public Sell(Sell temp) {
 		Patient_no = temp.getPatient_no();
 		Chemical_no = temp.getChemical_no();
