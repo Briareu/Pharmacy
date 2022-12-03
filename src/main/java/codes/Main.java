@@ -6,11 +6,11 @@ import connections.*;
 
 public class Main {
 	public static void main(String[] args) {
-		MainFrame c = new MainFrame();
-		c.setVisible(true);
-		
-		/*LoginFrame c = new LoginFrame();
+		/*MainFrame c = new MainFrame();
 		c.setVisible(true);*/
+		
+		LoginFrame c = new LoginFrame();
+		c.setVisible(true);
 		
 		/*Executor e = new Executor();
 		try {

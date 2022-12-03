@@ -28,6 +28,11 @@ public class Sell {
 		Deal_date = d;
 	}
 	
+	public Sell(String C_n, int count) {
+		Chemical_no = C_n;
+		Count = count;
+	}
+	
 	public Sell(Sell temp) {
 		Patient_no = temp.getPatient_no();
 		Chemical_no = temp.getChemical_no();

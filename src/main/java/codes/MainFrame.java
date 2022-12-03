@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
 	private JButton btn_select;
 	private JButton btn_detail;
 	
-	enum view_type{STORAGE, DRUG, MANUFACTURE, SELL, PATIENT};
+	enum view_type{STORAGE, DRUG, MANUFACTURE, SELL, PATIENT, SELL_OUTLINE};
 	public view_type current_type = view_type.STORAGE;
 
 	private JTextField text_1;
@@ -64,9 +64,8 @@ public class MainFrame extends JFrame {
 	public String current_title;
 	
 	private JLabel lblNewLabel;
-	private JLabel lb_sum_fixed;
-	private JLabel lb_sum;
-	private JLabel lb_yuan;
+	private JButton btnNewButton_2_1_2;
+	private JButton btn_sell_outline;
 
 	/**
 	 * Launch the application.
@@ -212,6 +211,26 @@ public class MainFrame extends JFrame {
 		btnNewButton_2_1_1.setBorderPainted(false);
 		toolBar.add(btnNewButton_2_1_1);
 		
+		btn_sell_outline = new JButton("  \u836F\u54C1\u9500\u552E\u603B\u89C8  ");
+		btn_sell_outline.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				view_sell_outline();
+			}
+		});
+		btn_sell_outline.setForeground(Color.WHITE);
+		btn_sell_outline.setFont(new Font("宋体", Font.PLAIN, 25));
+		btn_sell_outline.setBorderPainted(false);
+		btn_sell_outline.setBackground(new Color(0, 64, 0));
+		toolBar.add(btn_sell_outline);
+		
+		btnNewButton_2_1_2 = new JButton("    ");
+		btnNewButton_2_1_2.setForeground(Color.WHITE);
+		btnNewButton_2_1_2.setFont(new Font("宋体", Font.PLAIN, 20));
+		btnNewButton_2_1_2.setEnabled(false);
+		btnNewButton_2_1_2.setBorderPainted(false);
+		btnNewButton_2_1_2.setBackground(new Color(0, 64, 0));
+		toolBar.add(btnNewButton_2_1_2);
+		
 		JButton btn_patient = new JButton("  \u75C5\u4EBA\u4FE1\u606F\u7BA1\u7406  ");
 		btn_patient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -240,6 +259,7 @@ public class MainFrame extends JFrame {
 		btn_add.setFont(new Font("宋体", Font.PLAIN, 20));
 		btn_add.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				add();
 			}
 		});
 		
@@ -335,24 +355,13 @@ public class MainFrame extends JFrame {
 		});
 		btn_detail.setFont(new Font("宋体", Font.PLAIN, 20));
 		
-		lb_sum_fixed = new JLabel("\u9500\u552E\u603B\u4EF7\uFF1A");
-		lb_sum_fixed.setHorizontalAlignment(SwingConstants.TRAILING);
-		lb_sum_fixed.setFont(new Font("宋体", Font.PLAIN, 20));
-		
-		lb_sum = new JLabel("NULL");
-		lb_sum.setHorizontalAlignment(SwingConstants.LEFT);
-		lb_sum.setFont(new Font("宋体", Font.PLAIN, 20));
-		
-		lb_yuan = new JLabel("\u5143");
-		lb_yuan.setHorizontalAlignment(SwingConstants.LEFT);
-		lb_yuan.setFont(new Font("宋体", Font.PLAIN, 20));
-		
+
 		gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
@@ -364,28 +373,23 @@ public class MainFrame extends JFrame {
 									.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 									.addGap(106))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addGap(2)
-											.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-											.addGap(18))
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-											.addGap(199)))
+									.addGap(2)
+									.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
 									.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
 									.addGap(79)))
 							.addGroup(gl_contentPane.createSequentialGroup()
@@ -393,13 +397,9 @@ public class MainFrame extends JFrame {
 								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
 								.addContainerGap()))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lb_sum_fixed, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(lb_sum, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lb_yuan)
-							.addGap(143))))
+							.addGap(339)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -419,13 +419,8 @@ public class MainFrame extends JFrame {
 						.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btn_select))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 504, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lb_sum, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lb_yuan, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lb_sum_fixed, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-					.addGap(21)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btn_exit)
 						.addComponent(btn_add)
@@ -440,7 +435,7 @@ public class MainFrame extends JFrame {
 		table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 		scrollPane.setViewportView(table);
 		
-		table_update(model);
+		table_update();
 		
 		contentPane.setLayout(gl_contentPane);
 		
@@ -516,6 +511,10 @@ public class MainFrame extends JFrame {
 			
 			radio_4.setVisible(false);
 			text_4.setVisible(false);
+			
+			btn_add.setVisible(true);
+			btn_detail.setVisible(true);
+			btn_select.setVisible(true);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
@@ -596,7 +595,7 @@ public class MainFrame extends JFrame {
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
 			
-			table_update(model);
+			table_update();
 			
 			contentPane.setLayout(gl_contentPane);
 			
@@ -678,6 +677,10 @@ public class MainFrame extends JFrame {
 			radio_3.setBackground(new Color(219, 255, 251));
 			radio_3.setVisible(true);
 			text_3.setVisible(true);
+
+			btn_add.setVisible(true);
+			btn_detail.setVisible(true);
+			btn_select.setVisible(true);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
@@ -758,7 +761,7 @@ public class MainFrame extends JFrame {
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
 			
-			table_update(model);
+			table_update();
 			
 			contentPane.setLayout(gl_contentPane);
 			
@@ -831,6 +834,10 @@ public class MainFrame extends JFrame {
 			
 			radio_4.setVisible(false);
 			text_4.setVisible(false);
+
+			btn_add.setVisible(true);
+			btn_detail.setVisible(true);
+			btn_select.setVisible(true);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
@@ -911,7 +918,7 @@ public class MainFrame extends JFrame {
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
 			
-			table_update(model);
+			table_update();
 			
 			contentPane.setLayout(gl_contentPane);
 			
@@ -994,177 +1001,10 @@ public class MainFrame extends JFrame {
 			radio_3.setBackground(new Color(219, 255, 251));
 			radio_3.setVisible(true);
 			text_3.setVisible(true);
-			
-			gl_contentPane = new GroupLayout(contentPane);
-			gl_contentPane.setHorizontalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_contentPane.createSequentialGroup()
-						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(94)
-										.addComponent(btn_add, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-										.addGap(227)
-										.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
-										.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-										.addGap(106))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(2)
-												.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-												.addGap(18))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
-												.addGap(199)))
-										.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-										.addGap(79)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(39)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
-									.addContainerGap()))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lb_sum_fixed, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(lb_sum, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(lb_yuan)
-								.addGap(143))))
-			);
-			gl_contentPane.setVerticalGroup(
-				gl_contentPane.createParallelGroup(Alignment.LEADING)
-					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
-					.addGroup(gl_contentPane.createSequentialGroup()
-						.addGap(30)
-						.addComponent(lblNewLabel)
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addComponent(radio_4)
-							.addComponent(radio_1)
-							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(radio_2)
-							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addComponent(radio_3)
-							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btn_select))
-						.addPreferredGap(ComponentPlacement.RELATED)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 504, GroupLayout.PREFERRED_SIZE)
-						.addGap(18)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(lb_sum, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lb_yuan, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lb_sum_fixed, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-						.addGap(21)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btn_exit)
-							.addComponent(btn_add)
-							.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
-			);
-			
-			table = new JTable();
-			table.setModel(model);
-			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
-			table.setBackground(new Color(255, 255, 255));
-			table.setRowHeight(25);
-			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
-			scrollPane.setViewportView(table);
-			
-			table_update(model);
-			
-			contentPane.setLayout(gl_contentPane);
-			
-			contentPane.revalidate();
-			
-			this.setLocationRelativeTo(null);
-			this.setDefaultCloseOperation(2);
-		}
-	}
-	
-	void view_patient() {
-		if(this.current_type == view_type.PATIENT) {
-			//just stay
-		}else {
-			this.current_type = view_type.PATIENT;
 
-			contentPane.removeAll();
-			contentPane.repaint();
-			
-			/*setBounds(100, 100, 1130, 800);
-			contentPane = new JPanel();
-			contentPane.setForeground(new Color(64, 128, 128));
-			contentPane.setBackground(new Color(219, 255, 251));
-			contentPane.setBorder(null);
-
-			setContentPane(contentPane);*/
-			
-			model = new DefaultTableModel(new Object[][] {
-			},
-			new String[] {
-					"病人编号", "姓名", "性别", "年龄", "联系电话", "住址"
-			}){
-				/**
-				 * 
-				 */
-				private static final long serialVersionUID = 1L;
-
-				public boolean isCellEditable(int row, int column)
-	            {
-	                return false;
-	            }
-			};
-			
-			scrollPane = new JScrollPane();
-			
-			lblNewLabel = new JLabel("病人信息管理");
-			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
-
-
-			radio_1.setSelected(false);
-			radio_2.setSelected(false);
-			radio_3.setSelected(false);
-			radio_4.setSelected(false);
-			text_1.setText("");
-			text_2.setText("");
-			text_3.setText("");
-			text_4.setText("");
-			
-			radio_1.setVisible(false);
-			text_1.setVisible(false);
-			
-			radio_2 = new JRadioButton("病人编号");
-			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
-			radio_2.setBackground(new Color(219, 255, 251));
-			radio_2.setVisible(true);
-			text_2.setVisible(true);
-			
-			radio_3 = new JRadioButton("姓名");
-			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
-			radio_3.setBackground(new Color(219, 255, 251));
-			radio_3.setVisible(true);
-			text_3.setVisible(true);
-
-			radio_4.setVisible(false);
-			text_4.setVisible(false);
+			btn_add.setVisible(true);
+			btn_detail.setVisible(true);
+			btn_select.setVisible(true);
 			
 			gl_contentPane = new GroupLayout(contentPane);
 			gl_contentPane.setHorizontalGroup(
@@ -1245,7 +1085,334 @@ public class MainFrame extends JFrame {
 			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
 			scrollPane.setViewportView(table);
 			
-			table_update(model);
+			table_update();
+			
+			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
+		}
+	}
+	
+	void view_sell_outline() {
+		if(this.current_type == view_type.SELL_OUTLINE) {
+			//just stay
+		}else {
+			this.current_type = view_type.SELL_OUTLINE;
+
+			contentPane.removeAll();
+			contentPane.repaint();
+			
+			/*setBounds(100, 100, 1130, 800);
+			contentPane = new JPanel();
+			contentPane.setForeground(new Color(64, 128, 128));
+			contentPane.setBackground(new Color(219, 255, 251));
+			contentPane.setBorder(null);
+
+			setContentPane(contentPane);*/
+			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+					"药品编号", "数量"
+			}){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
+			
+			scrollPane = new JScrollPane();
+			
+			lblNewLabel = new JLabel("药品销售总览");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
+
+			radio_1.setSelected(false);
+			radio_2.setSelected(false);
+			radio_3.setSelected(false);
+			radio_4.setSelected(false);
+			text_1.setText("");
+			text_2.setText("");
+			text_3.setText("");
+			text_4.setText("");
+			
+			radio_4 = new JRadioButton("病人编号");
+			radio_4.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_4.setBackground(new Color(219, 255, 251));
+			radio_4.setVisible(false);
+			text_4.setVisible(false);
+			
+			radio_1 = new JRadioButton("病人编号");
+			radio_1.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_1.setBackground(new Color(219, 255, 251));
+			radio_1.setVisible(false);
+			text_1.setVisible(false);
+			
+			radio_2 = new JRadioButton("病人编号");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(false);
+			text_2.setVisible(false);
+			
+			radio_3 = new JRadioButton("药品编号");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(false);
+			text_3.setVisible(false);
+			
+			btn_add.setVisible(false);
+			btn_detail.setVisible(false);
+			btn_select.setVisible(false);
+			
+			gl_contentPane = new GroupLayout(contentPane);
+			gl_contentPane.setHorizontalGroup(
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createSequentialGroup()
+						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(94)
+										.addComponent(btn_add, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addGap(227)
+										.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+										.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addGap(106))
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(2)
+										.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addGap(79)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(39)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap()))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(339)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())))
+			);
+			gl_contentPane.setVerticalGroup(
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createSequentialGroup()
+						.addGap(30)
+						.addComponent(lblNewLabel)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4)
+							.addComponent(radio_1)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btn_select))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_add)
+							.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+			);
+			
+			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
+			table.setBackground(new Color(255, 255, 255));
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
+			
+			table_update();
+			
+			contentPane.setLayout(gl_contentPane);
+			
+			contentPane.revalidate();
+			
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(2);
+		}
+	}
+	
+	void view_patient() {
+		if(this.current_type == view_type.PATIENT) {
+			//just stay
+		}else {
+			this.current_type = view_type.PATIENT;
+
+			contentPane.removeAll();
+			contentPane.repaint();
+			
+			/*setBounds(100, 100, 1130, 800);
+			contentPane = new JPanel();
+			contentPane.setForeground(new Color(64, 128, 128));
+			contentPane.setBackground(new Color(219, 255, 251));
+			contentPane.setBorder(null);
+
+			setContentPane(contentPane);*/
+			
+			model = new DefaultTableModel(new Object[][] {
+			},
+			new String[] {
+					"病人编号", "姓名", "性别", "年龄", "联系电话", "住址"
+			}){
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
+				public boolean isCellEditable(int row, int column)
+	            {
+	                return false;
+	            }
+			};
+			
+			scrollPane = new JScrollPane();
+			
+			lblNewLabel = new JLabel("病人信息管理");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setFont(new Font("宋体", Font.PLAIN, 28));
+
+
+			radio_1.setSelected(false);
+			radio_2.setSelected(false);
+			radio_3.setSelected(false);
+			radio_4.setSelected(false);
+			text_1.setText("");
+			text_2.setText("");
+			text_3.setText("");
+			text_4.setText("");
+			
+			radio_1.setVisible(false);
+			text_1.setVisible(false);
+			
+			radio_2 = new JRadioButton("病人编号");
+			radio_2.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_2.setBackground(new Color(219, 255, 251));
+			radio_2.setVisible(true);
+			text_2.setVisible(true);
+			
+			radio_3 = new JRadioButton("姓名");
+			radio_3.setHorizontalAlignment(SwingConstants.TRAILING);
+			radio_3.setBackground(new Color(219, 255, 251));
+			radio_3.setVisible(true);
+			text_3.setVisible(true);
+
+			radio_4.setVisible(false);
+			text_4.setVisible(false);
+
+			btn_add.setVisible(true);
+			btn_detail.setVisible(true);
+			btn_select.setVisible(true);
+			
+			gl_contentPane = new GroupLayout(contentPane);
+			gl_contentPane.setHorizontalGroup(
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createSequentialGroup()
+						.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(94)
+										.addComponent(btn_add, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addGap(227)
+										.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+										.addComponent(btn_exit, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addGap(106))
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(2)
+										.addComponent(radio_4, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(radio_1, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(text_1, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(radio_2, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(radio_3, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+										.addGap(18)
+										.addComponent(btn_select, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+										.addGap(79)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(39)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 846, GroupLayout.PREFERRED_SIZE)
+									.addContainerGap()))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(339)
+								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
+								.addContainerGap())))
+			);
+			gl_contentPane.setVerticalGroup(
+				gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 818, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createSequentialGroup()
+						.addGap(30)
+						.addComponent(lblNewLabel)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(text_4, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_4)
+							.addComponent(radio_1)
+							.addComponent(text_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_2)
+							.addComponent(text_2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(radio_3)
+							.addComponent(text_3, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btn_select))
+						.addPreferredGap(ComponentPlacement.RELATED)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 558, GroupLayout.PREFERRED_SIZE)
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btn_exit)
+							.addComponent(btn_add)
+							.addComponent(btn_detail, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+			);
+			
+			table = new JTable();
+			table.setModel(model);
+			table.setFont(new Font("Adobe 仿宋 Std R", Font.PLAIN, 15));
+			table.setBackground(new Color(255, 255, 255));
+			table.setRowHeight(25);
+			table.getTableHeader().setPreferredSize(new Dimension(table.getTableHeader().getWidth(), 35));
+			scrollPane.setViewportView(table);
+			
+			table_update();
 			
 			contentPane.setLayout(gl_contentPane);
 			
@@ -1304,6 +1471,18 @@ public class MainFrame extends JFrame {
 		return res;
 	}
 	
+	Vector<Sell> Sell_Outline_getall(){
+		executor = new Executor();
+		Vector<Sell> res = new Vector<Sell>();
+		try {
+			res = executor.Sell_selectsum();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
 	Vector<Patient> Patient_getall(){
 		executor = new Executor();
 		Vector<Patient> res = new Vector<Patient>();
@@ -1316,7 +1495,11 @@ public class MainFrame extends JFrame {
 		return res;
 	}
 	
-	void table_update(DefaultTableModel current_model) {
+	void table_update() {
+		while(model.getRowCount() > 0) {
+			model.removeRow(model.getRowCount() - 1);
+		}
+		
 		switch(current_type) {
 		case STORAGE:
 		{
@@ -1328,9 +1511,9 @@ public class MainFrame extends JFrame {
 				arr[2] = res.get(i).getChemical_number();
 				arr[3] = res.get(i).getWarehouse_name();
 				
-				current_model.addRow(arr);
+				model.addRow(arr);
 			}
-			table.setModel(current_model);
+			table.setModel(model);
 			break;
 		}
 		case DRUG:
@@ -1348,9 +1531,9 @@ public class MainFrame extends JFrame {
 				arr[7] = res.get(i).getProduct_date();
 				arr[8] = res.get(i).getValidity_date();
 				
-				current_model.addRow(arr);
+				model.addRow(arr);
 			}
-			table.setModel(current_model);
+			table.setModel(model);
 			break;
 		}
 		case MANUFACTURE:
@@ -1363,9 +1546,9 @@ public class MainFrame extends JFrame {
 				arr[2] = res.get(i).getChemical_manufacture_tel();
 				arr[3] = res.get(i).getChemical_manufacture_email();
 				
-				current_model.addRow(arr);
+				model.addRow(arr);
 			}
-			table.setModel(current_model);
+			table.setModel(model);
 			break;
 		}
 		case SELL:
@@ -1378,9 +1561,9 @@ public class MainFrame extends JFrame {
 				arr[2] = res.get(i).getCount();
 				arr[3] = res.get(i).getDeal_date();
 				
-				current_model.addRow(arr);
+				model.addRow(arr);
 			}
-			table.setModel(current_model);
+			table.setModel(model);
 			break;
 		}
 		case PATIENT:
@@ -1395,11 +1578,25 @@ public class MainFrame extends JFrame {
 				arr[4] = res.get(i).getPatient_tel();
 				arr[5] = res.get(i).getPatient_add();
 				
-				current_model.addRow(arr);
+				model.addRow(arr);
 			}
-			table.setModel(current_model);
+			table.setModel(model);
 			break;
 		}
+		case SELL_OUTLINE:{
+			Vector<Sell> res = Sell_Outline_getall();
+			Object [] arr = new Object[2];
+			for(int i = 0; i < res.size(); i++) {
+				arr[0] = res.get(i).getChemical_no();
+				arr[1] = res.get(i).getCount();
+				
+				model.addRow(arr);
+			}
+			table.setModel(model);
+			break;
+		}
+		default:
+			break;
 		}
 	}
 	
@@ -1588,6 +1785,10 @@ public class MainFrame extends JFrame {
 			table.setModel(model);
 			break;
 		}
+		case SELL_OUTLINE:
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -1596,6 +1797,14 @@ public class MainFrame extends JFrame {
 		this.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
 		
 		DetailsFrame frame = new DetailsFrame(this, current_type, temp);
+		frame.setVisible(true);
+	}
+	
+	public void add() {
+		this.setEnabled(false);
+		this.setModalExclusionType(ModalExclusionType.NO_EXCLUDE);
+		
+		AddFrame frame = new AddFrame(this, current_type);
 		frame.setVisible(true);
 	}
 }
